@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine Proposal 💖</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    #container {
+        text-align: center;
+    }
+
+    h1 {
+        color: #fff;
+        margin-bottom: 30px;
+        font-size: 2.5em;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+
+    button {
+        padding: 15px 30px;
+        font-size: 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 10px;
+        transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+        background-color: #ff4d6d;
+        color: white;
+    }
+
+    #noBtn {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .fullscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        font-size: 50px;
+        border-radius: 0;
+        z-index: 999;
+    }
+</style>
+</head>
+<body>
+
+<div id="container">
+    <h1 id="question">Will you be my Valentine? 💘</h1>
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 😢</button>
+</div>
+
+<script>
+    const question = document.getElementById("question");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+
+    let yesSize = 20;
+
+    const prompts = [
+        "Are you sure? 🥺",
+        "Really sure?? 💔",
+        "Please say yes? 🙏",
+        "I'll be very sad... 😭",
+        "Pretty please? 🌹",
+        "You don't mean that... 😢",
+        "Give it another thought? 💭",
+        "My heart says yes ❤️",
+        "Don't break my heart 💔",
+        "Last chance... 😳",
+        "Okay fine... but Yes is still better 😌"
+    ];
+
+    let promptIndex = 0;
+
+    noBtn.addEventListener("click", () => {
+        // Change prompt
+        question.innerText = prompts[promptIndex];
+        promptIndex = (promptIndex + 1) % prompts.length;
+
+        // Grow Yes button
+        yesSize += 15;
+        yesBtn.style.fontSize = yesSize + "px";
+        yesBtn.style.padding = (yesSize / 2) + "px " + yesSize + "px";
+
+        // Eventually make fullscreen
+        if (yesSize > 200) {
+            yesBtn.classList.add("fullscreen");
+            yesBtn.innerText = "YES 💖";
+            noBtn.style.display = "none";
+            question.innerText = "You have no choice now 😌💘";
+        }
+    });
+
+    yesBtn.addEventListener("click", () => {
+        document.body.innerHTML = `
+            <div style="
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                height:100vh;
+                font-size:50px;
+                background: linear-gradient(135deg, #ff4d6d, #ff9a9e);
+                color:white;
+                text-align:center;
+            ">
+                YAY!!! 💖💖💖<br>
+                Best decision ever 🥰
+            </div>
+        `;
+    });
+</script>
+
+</body>
+</html>
