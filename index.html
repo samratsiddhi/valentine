@@ -99,24 +99,25 @@
 
     let promptIndex = 0;
 
-    noBtn.addEventListener("click", () => {
-        // Change prompt
-        question.innerText = prompts[promptIndex];
-        promptIndex = (promptIndex + 1) % prompts.length;
+noBtn.addEventListener("click", () => {
+    // Show next prompt
+    question.innerText = prompts[promptIndex];
+    promptIndex = (promptIndex + 1) % prompts.length;
 
-        // Grow Yes button
-        yesSize += 15;
-        yesBtn.style.fontSize = yesSize + "px";
-        yesBtn.style.padding = (yesSize / 2) + "px " + yesSize + "px";
+    // Grow Yes button gradually
+    yesSize += 10;
+    yesBtn.style.fontSize = yesSize + "px";
+    yesBtn.style.padding = (yesSize / 2) + "px " + yesSize + "px";
 
-        // Eventually make fullscreen
-        if (yesSize > 500) {
-            yesBtn.classList.add("fullscreen");
-            yesBtn.innerText = "YES 💖";
-            noBtn.style.display = "none";
-            question.innerText = "You have no choice now 😌💘";
-        }
-    });
+    // Fullscreen at proper threshold
+    if (yesSize > 225) {
+        yesBtn.classList.add("fullscreen");
+        yesBtn.innerText = "YES 💖";
+        noBtn.style.display = "none";   // hide No button
+        question.style.display = "none"; // hide question
+    }
+});
+
 
     yesBtn.addEventListener("click", () => {
         document.body.innerHTML = `
